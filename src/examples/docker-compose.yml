@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  db:
+    container_name: db
+    hostname: db
+    image: argutec/postgres:12
+    ports:
+      - "6052:22"
+    environment:
+      POSTGRES_USER: p20051
+      POSTGRES_DB: crematorium
+      POSTGRES_PASSWORD: heslo
+    volumes:
+      - ./data/.ssh:/ssh
