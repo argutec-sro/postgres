@@ -1,11 +1,11 @@
-FROM postgres:9.5
+FROM postgres:12
 
 RUN apt-get update
 RUN apt-get install openssh-server -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/run/sshd
-RUN echo 'root:password' | chpasswd
+#RUN echo 'root:password' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 COPY entrypoint.sh /usr/local/bin
