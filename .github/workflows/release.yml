@@ -22,5 +22,5 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_PASS }}" | docker login -u argutecsro --password-stdin    
         
       - name: Build image
-        run: ./release.sh $RELEASE_VERSION
+        run: ./release-12.sh $RELEASE_VERSION
         working-directory: ./src/scripts/
