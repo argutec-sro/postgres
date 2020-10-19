@@ -19,7 +19,7 @@ jobs:
         run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
       
       - name: Log into registry
-        run: echo "${{ secrets.DOCKERHUB_PASS }}" | docker login -u michalholis --password-stdin    
+        run: echo "${{ secrets.DOCKERHUB_PASS }}" | docker login -u argutecsro --password-stdin    
         
       - name: Build image
         run: ./release.sh $RELEASE_VERSION
