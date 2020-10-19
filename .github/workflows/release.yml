@@ -1,0 +1,26 @@
+name: Docker
+
+on:
+  create:
+    tags:
+    - '*.*.*.*'
+
+env:
+  IMAGE_NAME: argutec/postgres
+
+jobs:
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set RELEASE_VERSION
+        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
+      
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKERHUB_PASS }}" | docker login -u michalholis --password-stdin    
+        
+      - name: Build image
+        run: ./release.sh $RELEASE_VERSION
+        working-directory: ./src/scripts/
